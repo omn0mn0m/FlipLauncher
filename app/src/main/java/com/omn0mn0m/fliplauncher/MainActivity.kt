@@ -10,12 +10,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,7 +33,6 @@ class MainActivity : ComponentActivity() {
                     containerColor = Color.Transparent
                 ) { innerPadding ->
                     Greeting(
-                        name = "Android",
                         modifier = Modifier.padding(innerPadding),
                     )
                 }
@@ -56,9 +52,9 @@ class MainActivity : ComponentActivity() {
             val centerMenu: TextView? = findViewById(centerMenuId)
             val rightMenu: TextView? = findViewById(rightMenuId)
 
-            leftMenu?.text = "Notifications"
-            centerMenu?.text = "Apps"
-            rightMenu?.text = "Shortcuts"
+            leftMenu?.text = getString(R.string.menu_bar_notifications)
+            centerMenu?.text = getString(R.string.menu_bar_apps)
+            rightMenu?.text = getString(R.string.menu_bar_shortcuts)
         }
     }
 
@@ -83,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)  // was 268468224
                     )
                 } catch (e : Exception) {
-                    Log.e(tag, "com.tcl.recents.RecentsListActivity not found");
+                    Log.e(tag, "com.tcl.recents.RecentsListActivity not found")
                 }
                 true
             }
@@ -118,7 +114,7 @@ class MainActivity : ComponentActivity() {
                         .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)  // was 268468224
                     )
                 } catch (e : Exception) {
-                    Log.e(tag, "com.tcl.notification not found");
+                    Log.e(tag, "com.tcl.notification not found")
                 }
                 true
             }
@@ -133,7 +129,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(modifier: Modifier = Modifier) {
 //    Text(
 //        text = "Hello $name!",
 //        modifier = modifier
@@ -144,6 +140,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     FlipLauncherTheme {
-        Greeting("Android")
+        Greeting()
     }
 }
