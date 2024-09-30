@@ -20,6 +20,7 @@
             android:name=".ShortcutsActivity"
             android:exported="false"
             android:label="Shortcuts"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.FlipLauncher" />
         <activity
             android:name=".AppsActivity"
@@ -33,7 +34,6 @@
             android:theme="@style/Theme.FlipLauncher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,8 +1,10 @@
 package com.omn0mn0m.fliplauncher
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -11,6 +13,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -18,30 +22,31 @@ import com.omn0mn0m.fliplauncher.ui.theme.FlipLauncherTheme
 
 class ShortcutsActivity : ComponentActivity() {
 
-    private val menuPackages = listOf(
-        MenuPackage("Phone", "com.android.dialer"),
-        MenuPackage("Messages", "com.android.mms"),
-        MenuPackage("Contacts", "com.android.contacts"),
-        MenuPackage("Gallery", "com.android.gallery3d"),
-        MenuPackage("Music", "com.android.music"),
-        MenuPackage("Camera", "com.tcl.camera"),
-        MenuPackage("Browser", "org.chromium.chrome"),
-        MenuPackage("Settings", "com.android.settings")
-    )
-
-    private val toolPackages = listOf(
-        MenuPackage("Recorder", "com.android.soundrecorder"),
-        MenuPackage("Calendar", "com.android.calendar"),
-        MenuPackage("Clock", "com.android.deskclock"),
-        MenuPackage("Note", "com.android.note"),
-        MenuPackage("Calculator", "com.android.calculator2"),
-        MenuPackage("Email", "com.android.email"),
-        MenuPackage("File Manager", "com.jrdcom.filemanager"),
-    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val packageManager = packageManager
+        enableEdgeToEdge()
+
+        val menuPackages = listOf(
+            MenuPackage("Browser", "org.chromium.chrome"),
+            MenuPackage("Camera", "com.tcl.camera"),
+            MenuPackage("Contacts", "com.android.contacts"),
+            MenuPackage("Gallery", "com.android.gallery3d"),
+            MenuPackage("Messages", "com.android.mms"),
+            MenuPackage("Music", "com.android.music"),
+            MenuPackage("Phone", "com.android.dialer"),
+            MenuPackage("Settings", "com.android.settings")
+        )
+
+        val toolPackages = listOf(
+            MenuPackage("Calculator", "com.android.calculator2"),
+            MenuPackage("Calendar", "com.android.calendar"),
+            MenuPackage("Clock", "com.android.deskclock"),
+            MenuPackage("Email", "com.android.email"),
+            MenuPackage("File Manager", "com.jrdcom.filemanager"),
+            MenuPackage("Note", "com.android.note"),
+            MenuPackage("Recorder", "com.android.soundrecorder"),
+        )
+
         setContent {
             FlipLauncherTheme {
                 Scaffold(
@@ -53,30 +58,40 @@ class ShortcutsActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         items(menuPackages) {
-                            TextButton(onClick = {
-                                startActivity(
-                                    packageManager.getLaunchIntentForPackage(it.packageName)
-                                )
-                            }) {
-                                Text(it.name)
-                            }
+                            Shortcut(it)
                         }
                         items(toolPackages) {
-                            TextButton(onClick = {
-                                startActivity(
-                                    packageManager.getLaunchIntentForPackage(it.packageName)
-                                )
-                            }) {
-                                Text(it.name)
-                            }
+                            Shortcut(it)
                         }
                     }
                 }
             }
         }
+        val decorMenuBarId = resources.getIdentifier("decor_menu_bar", "id", "android")
+        val decorMenuBar: View? = findViewById(decorMenuBarId)
+        decorMenuBar?.visibility = View.GONE
+
+        window.decorView.apply {
+            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        }
+    }
+
+    @Composable
+    fun Shortcut(menuPackage: MenuPackage, modifier: Modifier = Modifier) {
+        TextButton(
+            onClick = {
+                startActivity(
+                    packageManager.getLaunchIntentForPackage(menuPackage.packageName)
+                )
+            },
+            modifier = modifier
+        ) {
+            Text(menuPackage.name)
+        }
     }
 }
 
+@Immutable
 data class MenuPackage(
     val name: String,
     val packageName: String,
