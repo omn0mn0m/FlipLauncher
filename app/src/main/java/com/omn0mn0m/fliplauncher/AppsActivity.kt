@@ -1,5 +1,6 @@
 package com.omn0mn0m.fliplauncher
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
@@ -9,7 +10,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.omn0mn0m.fliplauncher.ui.theme.FlipLauncherTheme
 
 class AppsActivity : ComponentActivity() {
+    @SuppressLint("DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -62,8 +63,8 @@ class AppsActivity : ComponentActivity() {
             val rightMenu: TextView? = findViewById(rightMenuId)
 
             leftMenu?.text = ""
-            centerMenu?.text = "Select"
-            rightMenu?.text = "Options"
+            centerMenu?.text = getString(R.string.menu_bar_select)
+            rightMenu?.text = getString(R.string.menu_bar_options)
         }
     }
 

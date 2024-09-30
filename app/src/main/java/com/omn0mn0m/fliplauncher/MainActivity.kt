@@ -1,5 +1,6 @@
 package com.omn0mn0m.fliplauncher
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
     private val tag = "MainActivity"
     private var showMenuBar: Boolean = false
 
+    @SuppressLint("DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

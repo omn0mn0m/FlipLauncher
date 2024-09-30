@@ -1,5 +1,6 @@
 package com.omn0mn0m.fliplauncher
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
@@ -22,6 +23,7 @@ import com.omn0mn0m.fliplauncher.ui.theme.FlipLauncherTheme
 
 class ShortcutsActivity : ComponentActivity() {
 
+    @SuppressLint("DiscouragedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

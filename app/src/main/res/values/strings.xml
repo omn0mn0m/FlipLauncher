@@ -3,4 +3,6 @@
     <string name="menu_bar_notifications">Notifications</string>
     <string name="menu_bar_apps">Apps</string>
     <string name="menu_bar_shortcuts">Shortcuts</string>
+    <string name="menu_bar_select">Select</string>
+    <string name="menu_bar_options">Options</string>
 </resources>
