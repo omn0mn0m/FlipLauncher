@@ -3,6 +3,7 @@ package com.omn0mn0m.fliplauncher
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.view.WindowInsets
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -74,7 +75,7 @@ class ShortcutsActivity : ComponentActivity() {
         decorMenuBar?.visibility = View.GONE
 
         window.decorView.apply {
-            systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            windowInsetsController?.hide(WindowInsets.Type.navigationBars())
         }
     }
 

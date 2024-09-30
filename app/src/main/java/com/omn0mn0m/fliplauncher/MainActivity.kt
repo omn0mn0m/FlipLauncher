@@ -13,6 +13,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import android.view.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -64,12 +65,12 @@ class MainActivity : ComponentActivity() {
         if (showMenuBar) {
             decorMenuBar?.visibility = View.VISIBLE
             window.decorView.apply {
-                systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                windowInsetsController?.show(WindowInsets.Type.navigationBars())
             }
         } else {
             decorMenuBar?.visibility = View.GONE
             window.decorView.apply {
-                systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                windowInsetsController?.hide(WindowInsets.Type.navigationBars())
             }
         }
     }
@@ -110,12 +111,12 @@ class MainActivity : ComponentActivity() {
                 if (showMenuBar) {
                     decorMenuBar?.visibility = View.VISIBLE
                     window.decorView.apply {
-                        systemUiVisibility = View.SYSTEM_UI_FLAG_VISIBLE
+                        windowInsetsController?.show(WindowInsets.Type.navigationBars())
                     }
                 } else {
                     decorMenuBar?.visibility = View.GONE
                     window.decorView.apply {
-                        systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        windowInsetsController?.hide(WindowInsets.Type.navigationBars())
                     }
                 }
 
